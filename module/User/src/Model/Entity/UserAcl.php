@@ -53,6 +53,25 @@ class UserAcl
 
 		public function exchangeArray()
 		{
+			$this->id = !isset( $data[ "id" ] ) ? 
+				$data[ "id" ] : null;
+
+			$this->role = !isset( $data[ "role" ] ) ?
+				$data[ "role" ] : null;
+
+			$this->active = !isset( $data[ "active" ] ) ?
+				$data[ "active" ] : null;
+
+			$this->confirm = !isset( $data[ "confirm" ] ) ?
+				$data[ "confirm" ] : null;
+
+			$this->uid = !isset( $data[ "uid" ] ) ? 
+				$data[ "uid" ] : null;
+		}
+
+		public function getArrayCopy()
+		{
+			return get_object_vars( $this );
 		}
 
     /**

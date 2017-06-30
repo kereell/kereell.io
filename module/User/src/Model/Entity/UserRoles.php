@@ -30,8 +30,18 @@ class UserRoles
 
 
 
-		public function exchangeArray()
+		public function exchangeArray( array $data )
 		{
+			$this->uid = !isset( $data[ "uid" ] ) ?
+				$data[ "uid" ] : null;
+
+			$this->role = !isset( $data[ "role" ] ) ? 
+				$data[ "role" ] : null;
+		}
+
+		public function getArrayCopy()
+		{
+			return get_object_vars( $this );
 		}
 
     /**

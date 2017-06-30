@@ -39,7 +39,6 @@ class UserRolesTableGatewayFactory
 			);
 
 		return $userRolesTableGateway;
-
 	}
 }
 	

@@ -86,10 +86,54 @@ class UserDetails
 
 
 
-		public function exchangeArray()
+		public function exchangeArray( array $data )
 		{
+			$this->id = 
+				!isset( $data[ "id" ] ) ? 
+					$data[ "id" ] : null;
+
+			$this->firstname = 
+				!isset( $data[ "firstname" ] ) ? 
+					$data[ "firstname" ] : null;
+
+			$this->lastname = 
+				!isset( $data[ "lastname" ] ) ?
+					$data[ "lastname" ] : null;
+
+			$this->email = 
+				!isset( $data[ "email" ] ) ? 
+					$data[ "email" ] : null;
+
+			$this->gender = 
+				!isset( $data[ "gender" ] ) ?
+					$data[ "gender" ] : null;
+
+			$this->birthdate = 
+				!isset( $data[ "birthdate" ] ) ? 
+					$data[ "birthdate" ] : null;
+
+			$this->phone = 
+				!isset( $data[ "phone" ] ) ? 
+					$data[ "phone" ] : null;
+
+			$this->city = 
+				!isset( $data[ "city" ] ) ? 
+					$data[ "city" ] : null;
+
+			$this->country = 
+				!isset( $data[ "country" ] ) ? 
+					$data[ "country" ] : null;
+
+			$this->uid = 
+				!isset( $data[ "uid" ] ) ? 
+					$data[ "uid" ] : null;
+
 		}
 
+		public function getArrayCopy()
+		{
+			return get_object_vars( $this );
+		}
     /**
      * Get id
      *

@@ -39,7 +39,6 @@ class UserAclTableGatewayFactory
 			);
 
 		return $userAclTableGateway;
-
 	}
 }
 	
