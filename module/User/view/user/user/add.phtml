@@ -1,0 +1,22 @@
+<?php
+$form->setAttribute( "action", 
+	$this->url( "user", [ "action" => "add" ] ) );
+
+$email = $form->get( "email" );
+$passwd = $form->get( "passwd" );
+$passwdConfirm = $form->get( "passwdConfirm" );
+// $captcha = $form->get( "captcha" );
+$submit = $form->get( "submitButton" );
+$id = $form->get( "id" );
+
+$form->prepare();
+
+echo $this->form()->openTag( $form ) . "\n";
+echo $this->formElement( $email ) ."<br />\n";
+echo $this->formElement( $passwd ) ."<br />\n";
+echo $this->formElement( $passwdConfirm ) ."<br />\n";
+echo $this->formCaptcha( $captcha ) ."<br />\n";
+echo $this->formElement( $submit ) ."<br />\n";
+echo $this->formHidden( $id ) . "<br />\n";
+echo $this->form()->closeTag();
+
