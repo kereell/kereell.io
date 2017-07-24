@@ -160,19 +160,11 @@ class Module
 	{
 
 		return [
+
 			"factories" => [
 
 				"user.db_adapter" => 
 				DbAdapterServiceFactory :: class,
-
-				"user.credentials_entity" => 
-				Factory\Model\Entity\UserCredentialsFactory :: class,
-				"user.details_entity" => 
-				Factory\Model\Entity\UserDetailsFactory :: class,
-				"user.acl_entity" => 
-				Factory\Model\Entity\UserAclFactory :: class,
-				"user.roles_entity" => 
-				Factory\Model\Entity\UserRolesFactory :: class,
 
 				"user.credentials_tablegateway" =>
 				Factory\Model\TableGateway\UserCredentialsTableGatewayFactory :: class,
@@ -192,7 +184,9 @@ class Module
 
 				"user.captcha" => 
 				Factory\Form\UserRegistrationCaptchaFactory :: class,
+
 			],
+
 		];
 	}
 

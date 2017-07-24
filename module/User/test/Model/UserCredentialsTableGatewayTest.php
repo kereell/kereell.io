@@ -13,33 +13,20 @@ class UserCredentialsTableGatewayTest
 	{
 		parent :: setUp();
 
-		$this->tbGtw = $this->appServiceLocator->get( 
-			"user.credentials_tablegateway"
-		);
-
-		$this->userCredentialsEntity = 
-			$this->appServiceLocator->get( 
-				"user.credentials_entity"
+		$this->userCredentialsTableGateway 
+			= $this->appServiceLocator->get( 
+				"user.credentials_tablegateway"
 			);
 	}
 
 	private 
-		$userCredentialsEntity,
-		$tbGtw;
+		$userCredentialsTableGateway;
 
 	public function testUserCredentialsTableGTWFactory()
 	{
 		$this->assertInstanceOf( 
 			\User\Model\TableGateway\UserCredentialsTableGateway :: class,
-			$this->tbGtw 
-		);
-	}
-
-	public function testUserCredentialsEntityFactory()
-	{
-		$this->assertInstanceOf( 
-			\User\Model\Entity\UserCredentials :: class,
-			$this->userCredentialsEntity
+			$this->userCredentialsTableGateway 
 		);
 	}
 
@@ -54,16 +41,17 @@ class UserCredentialsTableGatewayTest
 	public function testSaveUserCredentials()
 	{
 		$this->testDataUserCredentials[ "email" ] = 
-			"jfkdlafjkdsl@gmail.com";
+			"daffaafd@gmail.com";
 
-		$this->userCredentialsEntity->exchangeArray( 
-			$this->testDataUserCredentials
-		);
+		$this->userCredentialsTableGateway
+			->getEntity()
+			->exchangeArray( 
+				$this->testDataUserCredentials
+			);
 
 		$this->assertTrue( 
-			( bool ) $this->tbGtw->saveUser( 
-				$this->userCredentialsEntity
-			)
+			( bool ) 
+			$this->userCredentialsTableGateway->saveUser() 
 		);
 	}
 
@@ -75,7 +63,10 @@ class UserCredentialsTableGatewayTest
 	public function testDeleteUserCredentials()
 	{
 		$this->assertTrue( 
-			( bool ) $this->tbGtw->deleteUser( 9 )
+			( bool ) 
+			$this->userCredentialsTableGateway->deleteUser( 
+				26 
+			)
 		);
 	}
 

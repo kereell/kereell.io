@@ -26,8 +26,11 @@ class UserControllerFactory implements FactoryInterface
 		$captcha = new Captcha();
 		$captcha->setCaptcha( $recaptcha );
 
+		$userCredentialsTableGateway = 
+			$container->get( "user.credentials_tablegateway" );
+
 		return new UserController( 
-			null,
+			$userCredentialsTableGateway,
 			$userRegistrationForm,
 			$captcha
 		);

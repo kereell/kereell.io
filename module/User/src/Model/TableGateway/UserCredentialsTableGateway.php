@@ -15,6 +15,8 @@ class UserCredentialsTableGateway
 
 	private 
 		$paginator,
+		$entity,
+		$resultSet,
 		$tableGateway;
 
 	public function __construct( 
@@ -22,8 +24,17 @@ class UserCredentialsTableGateway
 		Paginator $paginator = null
 	)
 	{
-		$this->tableGateway = $tableGateway;
-		$this->paginator = $paginator;
+		$this->tableGateway = 
+			$tableGateway;
+
+		$this->resultSet = 
+			$tableGateway->getResultSetPrototype();
+
+		$this->entity = 
+			$this->resultSet->getArrayObjectPrototype();
+
+		$this->paginator = 
+			$paginator;
 	}
 
 	public function fetchAll( $pagenated = true )
@@ -34,7 +45,7 @@ class UserCredentialsTableGateway
 		return $this->fetchPaginatedResult();
 	}
 
-	public function fetchPginatedResult()
+	public function fetchPaginatedResult()
 	{
 		$paginationAdapter = 
 			new PaginationAdapterTableGateway( 
@@ -64,16 +75,19 @@ class UserCredentialsTableGateway
 		return $row;
 	}
 
-	public function saveUser( UserCredentialsEntity $user )
+	public function saveUser()
 	{
+		$entity = 
+			$this->getEntity();
+
 		$data = [ 
-			"email" => $user->getEmail(),
-			"passwd" => $user->getPasswd(),
-			"active" => $user->getActive(),
-			"date" => $user->getDate(),
+			"email" => $entity->getEmail(),
+			"passwd" => $entity->getPasswd(),
+			"active" => $entity->getActive(),
+			"date" => $entity->getDate(),
 		];
 
-		$id = ( int ) $user->getId();
+		$id = ( int ) $entity->getId();
 
 		if( $id === 0 )
 			return $this->tableGateway->insert( $data );
@@ -94,6 +108,21 @@ class UserCredentialsTableGateway
 		return $this->tableGateway->delete( [ 
 			"id" => $id
 		] );
+	}
+
+	public function getTableGateway()
+	{
+		return $this->tableGateway;
+	}
+
+	public function getResultSet()
+	{
+		return $this->resultSet;
+	}
+
+	public function getEntity()
+	{
+		return $this->entity;
 	}
 
 }
