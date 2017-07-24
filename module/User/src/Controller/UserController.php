@@ -49,8 +49,11 @@ class UserController extends AbstractActionController
 				"form" => $form,
 				"captcha" => $this->captcha,
 			];
+
 		Debug :: dump( $form->getData() );
-		exit;
+		Debug :: dump( $form->getMessages() );
+
+		return [];
 		
 	}
 

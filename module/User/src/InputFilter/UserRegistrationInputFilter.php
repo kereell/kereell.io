@@ -3,14 +3,14 @@
 namespace User\InputFilter;
 
 use 
-	Zend\Filter\ToInt,
-	Zend\InputFilter\InputFilterAwareInterface,
-	Zend\InputFilter\InputFilterInterface,
+	Zend\Filter,
+	Zend\Validator,
+	Zend\InputFilter,
 	Zend\Db\Adapter\AdapterInterface as DbAdapterInterface,
 	Zend\Debug\Debug;
 
 class UserRegistrationInputFilter 
-	implements InputFilterAwareInterface
+	implements InputFilter\InputFilterAwareInterface
 {
 	public function __construct( DbAdapterInterface $userDbAdapter )
 	{
@@ -29,7 +29,7 @@ class UserRegistrationInputFilter
 				"required" => true,
 				"filters" => [
 					[ 
-						"name" => ToInt :: class,
+						"name" => Filter\ToInt :: class,
 					],
 				],
 				"validators" => []
@@ -37,20 +37,48 @@ class UserRegistrationInputFilter
 			->add( [ 
 				"name" => "email",
 				"required" => true,
-				"filters" => [],
-				"validators" => []
+				"filters" => [
+					[
+						"name" => Filter\StringTrim :: class,
+					],
+					[
+						"name" => Filter\StripTags :: class,
+					],
+					[
+						"name" => Filter\StripNewlines :: class,
+					],
+				],
+				"validators" => [
+					[
+						"name" => Validator\EmailAddress :: class,
+					],
+				]
 			] )
 			->add( [ 
 				"name" => "passwd",
 				"required" => true,
-				"filters" => [],
+				"filters" => [
+					[
+						"name" => Filter\Encrypt :: class,
+  					"options" => [
+							"key" => "passwd",
+						],
+					],
+				],
 				"validators" => []
 			] )
 			->add( [ 
 				"name" => "passwdConfirm",
 				"required" => true,
 				"filters" => [],
-				"validators" => []
+				"validators" => [
+					[
+						"name" => Validator\Identical :: class,
+						"options" => [
+							"token" => "passwd",
+						],
+					],
+				]
 			] )
 			->add( [ 
 				"name" => "captcha",
@@ -60,7 +88,7 @@ class UserRegistrationInputFilter
 		return $this->inputFilter;
 	}
 
-	public function setInputFilter( InputFilterInterface $inputFilter )
+	public function setInputFilter( InputFilter\InputFilterInterface $inputFilter )
 	{
 		$this->inputFilter = $inputFilter;
 		return $this;

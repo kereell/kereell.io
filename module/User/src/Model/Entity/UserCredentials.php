@@ -51,22 +51,22 @@ class UserCredentials
 
 
 
-		public function exchangeArray( array $array )
+		public function exchangeArray( array $data )
 		{
-			$this->id = !isset( $data[ "id" ] ) ?
+			$this->id = isset( $data[ "id" ] ) ?
 				$data[ "id" ] : null;
 
-			$this->email = !isset( $data[ "email" ] ) ?
+			$this->email = isset( $data[ "email" ] ) ?
 				$data[ "email" ] : null;
 
-			$this->passwd = !isset( $data[ "passwd" ] ) ?
+			$this->passwd = isset( $data[ "passwd" ] ) ?
 				$data[ "passwd" ] : null;
 
-			$this->active = !isset( $data[ "active" ] ) ? 
+			$this->active = isset( $data[ "active" ] ) ? 
 				$data[ "active" ] : null;
 
-			$this->data = !isset( $data[ "data" ] ) ? 
-				$data[ "active" ] : null;
+			$this->date = isset( $data[ "date" ] ) ? 
+				$data[ "date" ] : null;
 		}
 
 		public function getArrayCopy()

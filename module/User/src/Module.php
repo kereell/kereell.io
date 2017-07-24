@@ -68,7 +68,10 @@ class Module
 	{
 		return [
 			"factories" => [
-				"user.controller" => Factory\Controller\UserControllerFactory :: class,
+
+				"user.controller" => 
+				Factory\Controller\UserControllerFactory :: class,
+
 			],
 		];
 	}
@@ -158,6 +161,7 @@ class Module
 
 		return [
 			"factories" => [
+
 				"user.db_adapter" => 
 				DbAdapterServiceFactory :: class,
 

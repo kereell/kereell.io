@@ -3,6 +3,8 @@
 namespace User\Factory\Model\TableGateway;
 
 use 
+	User\Model\TableGateway\UserCredentialsTableGateway,
+	User\Model\Entity\UserCredentials as UserCredentialsEntity,
 	Zend\Db\TableGateway\TableGateway,
 	Zend\Db\ResultSet\ResultSet as DbResultSet,
 	Interop\Container\ContainerInterface,
@@ -21,21 +23,23 @@ class UserCredentialsTableGatewayFactory
 		$dbAdapter = 
 			$container->get( "user.db_adapter" );
 
-		$userCredentialsEntity = 
-			$container->get( "user.credentials_entity" );
+		$dbResultSetPrototype = new DbResultSet();
 
-		$dbResultSet = new DbResultSet();
-
-		$dbResultSet->setArrayObjectPrototype( 
-			$userCredentialsEntity
+		$dbResultSetPrototype->setArrayObjectPrototype( 
+			new UserCredentialsEntity
 		);
 
-		$userCredentialsTableGateway = 
+		$tableGateway = 
 			new TableGateway(
 				"user_credentials",
 				$dbAdapter,
 				null,
-				$dbResultSet
+				$dbResultSetPrototype
+			);
+
+		$userCredentialsTableGateway = 
+			new UserCredentialsTableGateway( 
+				$tableGateway 
 			);
 
 		return $userCredentialsTableGateway;

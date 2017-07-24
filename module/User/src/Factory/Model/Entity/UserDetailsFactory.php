@@ -14,8 +14,12 @@ class UserDetailsFactory implements FactoryInterface
      * @param null|array $options
      * @return UserDetails
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
-        return new UserDetails();
-    }
+	public function __invoke( 
+		ContainerInterface $container, 
+		$requestedName, 
+		array $options = null 
+	)
+	{
+		return new UserDetails();
+	}
 }
