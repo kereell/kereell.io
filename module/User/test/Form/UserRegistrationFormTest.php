@@ -40,7 +40,6 @@ class UserRegistrationFormTest
 
 		}
 
-//		Debug :: dump( $form->getData(), "\e[5mData\033[00m: " );
 		
 	}
 }

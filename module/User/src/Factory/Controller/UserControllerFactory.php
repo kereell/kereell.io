@@ -20,19 +20,12 @@ class UserControllerFactory implements FactoryInterface
 		$userRegistrationForm = 
 			$container->get( "user.registration_form" );
 
-		$recaptcha = 
-			$container->get( "user.captcha" );
-
-		$captcha = new Captcha();
-		$captcha->setCaptcha( $recaptcha );
-
 		$userCredentialsTableGateway = 
 			$container->get( "user.credentials_tablegateway" );
 
 		return new UserController( 
 			$userCredentialsTableGateway,
-			$userRegistrationForm,
-			$captcha
+			$userRegistrationForm
 		);
 	}
 }

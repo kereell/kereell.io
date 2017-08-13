@@ -225,7 +225,6 @@ normal! zt
 27
 normal! 04|
 wincmd w
-3wincmd w
 exe '1resize ' . ((&lines * 34 + 36) / 72)
 exe 'vert 1resize ' . ((&columns * 90 + 136) / 272)
 exe '2resize ' . ((&lines * 34 + 36) / 72)

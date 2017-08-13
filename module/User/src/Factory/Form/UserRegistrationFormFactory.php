@@ -18,15 +18,11 @@ class UserRegistrationFormFactory
 		array $options = null
 	)
 	{
-		$recaptcha = $container->get( "user.captcha" );
-
-		$captcha = new Captcha();
-		$captcha->setCaptcha( $recaptcha );
+		$recaptcha = $container->get( "user.recaptcha" );
 
 		$userRegistrationForm = 
 			new UserRegistrationForm( 
-				"userRegistrationForm",
-				$captcha 
+				$recaptcha 
 			);
 
 		$userRegistrationInputFilter = 

@@ -4,38 +4,45 @@ namespace User\Form;
 
 use 
 	Zend\Form\Form,
+	Zend\Form\Element as FormElement,
 	Zend\Debug\Debug;
 
 class UserRegistrationForm extends Form
 {
+	private 
+		$captcha;
 
-	public function __construct( $name, $captcha )
-	{
-		parent :: __construct( $name );
+	public function __construct( 
+		$captcha 
+	)
+	{  
+		$this->captcha = 
+			$captcha;
+     
+		parent :: __construct( "userRegistrationForm" );
 
 		$this->setAttributes( [ 
-			"id" => "login-form", 
-			"role" => "form",
-			"style" => "display: block",
+			"class" => "form-signin",
 		] );
 
 		$this
 			->add( [ 
 				"name" => "id",
-				"type" => "hidden",
+				"type" => FormElement\Hidden :: class,
 			] )
 			->add( [ 
 				"name" => "email",
-				"type" => "email",
+				"type" => FormElement\Email :: class,
 				"attributes" => [
 					"class" => "form-control",
-					"placeholder" => "Email",
+					"placeholder" => "Email Address",
+					"autofocus" => true,
 				],
 				"options" => []
 			] )
 			->add( [ 
 				"name" => "passwd",
-				"type" => "password",
+				"type" => FormElement\Password :: class,
 				"attributes" => [
 					"class" => "form-control",
 					"placeholder" => "Password",
@@ -43,8 +50,8 @@ class UserRegistrationForm extends Form
 				"options" => [],
 			] )
 			->add( [ 
-				"name" => "passwdConfirm",
-				"type" => "password",
+				"name" => "passwd_confirm",
+				"type" => FormElement\Password :: class,
 				"attributes" => [
 					"class" => "form-control",
 					"placeholder" => "Repeat Password",
@@ -52,13 +59,31 @@ class UserRegistrationForm extends Form
 				"options" => [],
 			] )
 			->add( [ 
-				"name" => "captcha",
+				"name" => "re_captcha",
+				"type" => FormElement\Captcha :: class,
+				"options" => [
+					"captcha" => $this->captcha,
+				],
 			] )
 			->add( [ 
-				"name" => "submitButton",
-				"type" => "submit",
+				"name" => "remember_me",
+				"type" => FormElement\Checkbox :: class,
+				"options" => [
+					"label" => "Remember Me",
+					"use_hidden_element" => false,
+				],
 				"attributes" => [
-					"class" => "form-control btn btn-login",
+				],
+			] )
+			->add( [ 
+				"name" => "csrf_security",
+				"type" => Formelement\Csrf :: class,
+			] )
+			->add( [ 
+				"name" => "submit_button",
+				"type" => FormElement\Submit :: class,
+				"attributes" => [
+					"class" => "btn btn-lg btn-primary  btn-block",
 					"value" => "Add User",
 				],
 				"options" => [],

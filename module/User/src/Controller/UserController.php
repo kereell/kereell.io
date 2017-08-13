@@ -11,19 +11,16 @@ class UserController extends AbstractActionController
 {
 	public function __construct( 
 		$userTableGateway,
-		$userRegistrationForm,
-		$captcha
+		$userRegistrationForm
 	)
 	{
 		$this->userTableGateway = $userTableGateway;
 		$this->userRegistrationForm = $userRegistrationForm;
-		$this->captcha = $captcha;
 	}
 
 	private 
 		$userTableGateway,
-		$userRegistrationForm,
-		$captcha;
+		$userRegistrationForm;
 
 	public function listAction()
 	{
@@ -39,7 +36,6 @@ class UserController extends AbstractActionController
 		if ( ! $this->request->isPost() )
 			return [
 				"form" => $form,
-				"captcha" => $this->captcha,
 			];
 
 		$form->setData( $this->request->getPost() );
@@ -47,7 +43,6 @@ class UserController extends AbstractActionController
 		if ( ! $form->isValid() )
 			return [
 				"form" => $form,
-				"captcha" => $this->captcha,
 			];
 
 		return [];

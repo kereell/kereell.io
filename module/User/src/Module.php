@@ -182,7 +182,7 @@ class Module
 				"user.registration_input_filter" => 
 				Factory\InputFilter\UserRegistrationInputFilterFactory :: class,
 
-				"user.captcha" => 
+				"user.recaptcha" => 
 				Factory\Form\UserRegistrationCaptchaFactory :: class,
 
 			],
@@ -209,6 +209,26 @@ class Module
 	 */
 	public function getViewHelperConfig()
 	{
+		return [
 
+			"factories" => [
+
+				"userRegistrationElementError" => function( $serviceManager ){
+
+					$helper = new \Zend\Form\View\Helper\FormElementErrors();
+					$helper->setMessageOpenFormat( "<div%s>" );
+					$helper->setMessageSeparatorString( "</div><div>" );
+					$helper->setMessageCloseString( "</div>" );
+					$helper->setAttributes( [
+						"class" => "alert alert-danger",
+						"role" => "alert",
+					] );
+
+					return $helper;
+				},
+
+			],
+
+		];
 	}
 }	
