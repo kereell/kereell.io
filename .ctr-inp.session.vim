@@ -23,9 +23,10 @@ badd +24 vendor/zendframework/zendservice-recaptcha/test/ReCaptchaTest.php
 badd +1 vendor/zendframework/zendservice-recaptcha/test/ResponseTest.php
 badd +1 module/User/src/Factory/Authentication
 badd +1 module/User/src/Factory/Model
-badd +0 vendor/zendframework/zend-form/src/Element/Checkbox.php
-badd +0 vendor/zendframework/zend-form/src/Element.php
-badd +0 vendor/zendframework/zend-form/src/Element/Csrf.php
+badd +18 vendor/zendframework/zend-form/src/Element/Checkbox.php
+badd +366 vendor/zendframework/zend-form/src/Element.php
+badd +34 vendor/zendframework/zend-form/src/Element/Csrf.php
+badd +0 vendor/zendframework/zend-validator/src/Csrf.php
 argglobal
 silent! argdel *
 $argadd module/User/src/Factory/Authentication
@@ -74,10 +75,7 @@ wincmd _ | wincmd |
 split
 wincmd _ | wincmd |
 split
-wincmd _ | wincmd |
-split
-3wincmd k
-wincmd w
+2wincmd k
 wincmd w
 wincmd w
 wincmd t
@@ -102,14 +100,12 @@ exe '9resize ' . ((&lines * 17 + 36) / 72)
 exe 'vert 9resize ' . ((&columns * 68 + 136) / 272)
 exe '10resize ' . ((&lines * 16 + 36) / 72)
 exe 'vert 10resize ' . ((&columns * 68 + 136) / 272)
-exe '11resize ' . ((&lines * 16 + 36) / 72)
+exe '11resize ' . ((&lines * 22 + 36) / 72)
 exe 'vert 11resize ' . ((&columns * 67 + 136) / 272)
-exe '12resize ' . ((&lines * 17 + 36) / 72)
+exe '12resize ' . ((&lines * 22 + 36) / 72)
 exe 'vert 12resize ' . ((&columns * 67 + 136) / 272)
-exe '13resize ' . ((&lines * 16 + 36) / 72)
+exe '13resize ' . ((&lines * 23 + 36) / 72)
 exe 'vert 13resize ' . ((&columns * 67 + 136) / 272)
-exe '14resize ' . ((&lines * 17 + 36) / 72)
-exe 'vert 14resize ' . ((&columns * 67 + 136) / 272)
 argglobal
 2argu
 edit module/User/src/Factory/Controller/UserControllerFactory.php
@@ -154,19 +150,27 @@ normal! zo
 normal! zo
 13
 normal! zo
-25
+28
 normal! zo
-32
+35
 normal! zo
-37
+41
 normal! zo
-44
+45
 normal! zo
-let s:l = 47 - ((15 * winheight(0) + 11) / 23)
+50
+normal! zo
+50
+normal! zo
+54
+normal! zo
+54
+normal! zo
+let s:l = 58 - ((18 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
+58
 normal! 0
 lcd /var/www/kereell.io
 wincmd w
@@ -271,14 +275,24 @@ normal! zo
 normal! zo
 76
 normal! zo
-86
+82
 normal! zo
-let s:l = 75 - ((5 * winheight(0) + 11) / 23)
+88
+normal! zo
+91
+normal! zo
+92
+normal! zo
+98
+normal! zo
+108
+normal! zo
+let s:l = 90 - ((6 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-75
-normal! 0
+90
+normal! 027|
 lcd /var/www/kereell.io
 wincmd w
 argglobal
@@ -370,11 +384,11 @@ normal! zo
 normal! zo
 15
 normal! zo
-let s:l = 25 - ((14 * winheight(0) + 8) / 17)
+let s:l = 23 - ((12 * winheight(0) + 8) / 17)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-25
+23
 normal! 019|
 lcd /var/www/kereell.io
 wincmd w
@@ -457,11 +471,11 @@ normal! zo
 normal! zo
 85
 normal! zo
-let s:l = 22 - ((8 * winheight(0) + 8) / 17)
+let s:l = 81 - ((8 * winheight(0) + 8) / 17)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-22
+81
 normal! 026|
 lcd /var/www/kereell.io
 wincmd w
@@ -486,12 +500,12 @@ normal! zo
 normal! zo
 33
 normal! zo
-let s:l = 41 - ((5 * winheight(0) + 8) / 16)
+let s:l = 28 - ((3 * winheight(0) + 8) / 16)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-41
-normal! 03|
+28
+normal! 0
 lcd /var/www/kereell.io
 wincmd w
 argglobal
@@ -511,7 +525,7 @@ normal! zo
 normal! zo
 14
 normal! zo
-let s:l = 17 - ((1 * winheight(0) + 8) / 16)
+let s:l = 17 - ((2 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -521,60 +535,7 @@ lcd /var/www/kereell.io
 wincmd w
 argglobal
 6argu
-edit /var/www/kereell.io/vendor/zendframework/zend-form/src/Element.php
-setlocal fdm=expr
-setlocal fde=GetPhpFold(v:lnum)
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-12
-normal! zo
-16
-normal! zo
-16
-normal! zo
-22
-normal! zo
-22
-normal! zo
-59
-normal! zo
-66
-normal! zo
-66
-normal! zo
-70
-normal! zo
-320
-normal! zo
-328
-normal! zo
-328
-normal! zo
-367
-normal! zo
-378
-normal! zo
-378
-normal! zo
-379
-normal! zo
-385
-normal! zo
-let s:l = 366 - ((38 * winheight(0) + 8) / 17)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-366
-normal! 0
-lcd /var/www/kereell.io
-wincmd w
-argglobal
-6argu
-edit /var/www/kereell.io/vendor/zendframework/zend-form/src/Element/Checkbox.php
+edit /var/www/kereell.io/vendor/zendframework/zend-validator/src/Csrf.php
 setlocal fdm=expr
 setlocal fde=GetPhpFold(v:lnum)
 setlocal fmr={{{,}}}
@@ -593,43 +554,51 @@ normal! zo
 normal! zo
 19
 normal! zo
-let s:l = 18 - ((0 * winheight(0) + 8) / 16)
+25
+normal! zo
+29
+normal! zo
+33
+normal! zo
+40
+normal! zo
+48
+normal! zo
+55
+normal! zo
+61
+normal! zo
+66
+normal! zo
+72
+normal! zo
+241
+normal! zo
+let s:l = 262 - ((74 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-18
-normal! 04|
+262
+normal! 0
 lcd /var/www/kereell.io
 wincmd w
 argglobal
 6argu
-edit /var/www/kereell.io/vendor/zendframework/zend-form/src/Element/Csrf.php
-setlocal fdm=expr
-setlocal fde=GetPhpFold(v:lnum)
+edit /var/www/kereell.io/vendor/zendframework/zend-validator/src
+setlocal fdm=syntax
+setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
 setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-12
-normal! zo
-18
-normal! zo
-18
-normal! zo
-20
-normal! zo
-20
-normal! zo
-65
-normal! zo
-let s:l = 34 - ((0 * winheight(0) + 8) / 17)
+let s:l = 15 - ((8 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-34
-normal! 01|
+15
+normal! 0
 lcd /var/www/kereell.io
 wincmd w
 5wincmd w
@@ -653,14 +622,12 @@ exe '9resize ' . ((&lines * 17 + 36) / 72)
 exe 'vert 9resize ' . ((&columns * 68 + 136) / 272)
 exe '10resize ' . ((&lines * 16 + 36) / 72)
 exe 'vert 10resize ' . ((&columns * 68 + 136) / 272)
-exe '11resize ' . ((&lines * 16 + 36) / 72)
+exe '11resize ' . ((&lines * 22 + 36) / 72)
 exe 'vert 11resize ' . ((&columns * 67 + 136) / 272)
-exe '12resize ' . ((&lines * 17 + 36) / 72)
+exe '12resize ' . ((&lines * 22 + 36) / 72)
 exe 'vert 12resize ' . ((&columns * 67 + 136) / 272)
-exe '13resize ' . ((&lines * 16 + 36) / 72)
+exe '13resize ' . ((&lines * 23 + 36) / 72)
 exe 'vert 13resize ' . ((&columns * 67 + 136) / 272)
-exe '14resize ' . ((&lines * 17 + 36) / 72)
-exe 'vert 14resize ' . ((&columns * 67 + 136) / 272)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

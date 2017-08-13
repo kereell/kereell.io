@@ -14,8 +14,11 @@ class UserController extends AbstractActionController
 		$userRegistrationForm
 	)
 	{
-		$this->userTableGateway = $userTableGateway;
-		$this->userRegistrationForm = $userRegistrationForm;
+		$this->userTableGateway = 
+			$userTableGateway;
+
+		$this->userRegistrationForm = 
+			$userRegistrationForm;
 	}
 
 	private 
@@ -31,19 +34,26 @@ class UserController extends AbstractActionController
 
 	public function addAction()
 	{
-		$form = $this->userRegistrationForm;
+		$form = 
+			$this->userRegistrationForm;
 
 		if ( ! $this->request->isPost() )
 			return [
 				"form" => $form,
 			];
 
-		$form->setData( $this->request->getPost() );
+		$form->setData( 
+			$this->request->getPost() 
+		);
 
 		if ( ! $form->isValid() )
 			return [
 				"form" => $form,
 			];
+
+		Debug :: dump( 
+			$form->getData()
+		);
 
 		return [];
 		

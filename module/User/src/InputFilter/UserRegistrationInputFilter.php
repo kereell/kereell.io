@@ -67,7 +67,7 @@ class UserRegistrationInputFilter
 			] )
 
 			->add( [ 
-				"name" => "passwdConfirm",
+				"name" => "passwd_confirm",
 				"required" => true,
 				"filters" => [],
 				"validators" => [
@@ -78,6 +78,28 @@ class UserRegistrationInputFilter
 						],
 					],
 				]
+			] )
+			->add( [ 
+				"name" => "re_captcha",
+				"required" => true,
+				"filters" => [],
+				"validators" => [],
+			] )
+			->add( [ 
+				"name" => "remember_me",
+				"required" => false,
+				"filters" => [
+					[
+						"name" => Filter\ToInt :: class,
+					]
+				],
+				"validators" => [],
+			] )
+			->add( [ 
+				"name" => "csrf_security",
+				"required" => true,
+				"filters" => [],
+				"validators" => [],
 			] );
 		 
 		return $this->inputFilter;
