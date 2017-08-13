@@ -38,6 +38,7 @@ class UserCredentialsTableGatewayTest
 		);
 	}
 
+	/*
 	public function testSaveUserCredentials()
 	{
 		$this->testDataUserCredentials[ "email" ] = 
@@ -69,5 +70,6 @@ class UserCredentialsTableGatewayTest
 			)
 		);
 	}
-
+	 */
+		
 }

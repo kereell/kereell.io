@@ -12,7 +12,9 @@ use
 class UserRegistrationInputFilter 
 	implements InputFilter\InputFilterAwareInterface
 {
-	public function __construct( DbAdapterInterface $userDbAdapter )
+	public function __construct( 
+		DbAdapterInterface $userDbAdapter 
+	)
 	{
 		$this->userDbAdapter = $userDbAdapter;
 	}
@@ -34,6 +36,7 @@ class UserRegistrationInputFilter
 				],
 				"validators" => []
 			] )
+
 			->add( [ 
 				"name" => "email",
 				"required" => true,
@@ -54,19 +57,15 @@ class UserRegistrationInputFilter
 					],
 				]
 			] )
+
 			->add( [ 
 				"name" => "passwd",
 				"required" => true,
 				"filters" => [
-					[
-						"name" => Filter\Encrypt :: class,
-  					"options" => [
-							"key" => "passwd",
-						],
-					],
 				],
 				"validators" => []
 			] )
+
 			->add( [ 
 				"name" => "passwdConfirm",
 				"required" => true,
@@ -79,12 +78,8 @@ class UserRegistrationInputFilter
 						],
 					],
 				]
-			] )
-			->add( [ 
-				"name" => "captcha",
-				"required" => false,
 			] );
-
+		 
 		return $this->inputFilter;
 	}
 

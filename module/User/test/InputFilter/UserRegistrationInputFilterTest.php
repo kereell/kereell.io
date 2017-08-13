@@ -23,6 +23,13 @@ class UserRegistrationInputFilterTest
 			);
 		$this->inputFilter = 
 			$this->userRegistrationInputFilter->getInputFilter();
+
+		$this->inputFilter->setData( [ 
+			"id" => 1,
+			"email" => "kereell@kereell.com",
+			"passwd" => "kereell",
+			"passwdConfirm" => "kereell",
+		] );
 	}
 
 	private 
@@ -42,12 +49,83 @@ class UserRegistrationInputFilterTest
 		);
 	}
 
-	public function testIdFieldOfUserRegistrationInputFilter()
+	public function testIdUserRegistrationInputFilter()
 	{
 		$this->assertTrue( 
 			$this->inputFilter->has( 
 				"id" 
 			)
 		);
+
+		Debug :: dump( 
+			$this->inputFilter->getValue( 
+				"id"
+			), "The Id value of input filter"
+		);
 	}
+
+	public function testEmailUserRegistrationInputFilter()
+	{
+		$this->assertTrue( 
+			$this->inputFilter->has( 
+				"email"
+			),
+			"Testing if input filter has email field: "
+		);
+
+		Debug :: dump( 
+			$this->inputFilter->getValue( 
+				"email"
+			), "The Email value of input Filter"
+		);
+	}
+
+	public function testPasswdUserRegistrationInputFilter()
+	{
+		$this->assertTrue( 
+			$this->inputFilter->has( 
+				"passwd"
+			), 
+			"Testing if input filter has a passwd field: " 
+		);
+
+		Debug :: dump( 
+			$this->inputFilter->getValue( 
+				"passwd"
+			), "The Password value of Input Filter"
+		);
+
+	}
+
+	public function testPasswdConfirmUserRegistrationInputFilter()
+	{
+		$this->assertTrue( 
+			$this->inputFilter->has( 
+				"passwdConfirm"
+			), "Test if input filter has a passwdConfirm field: "
+		);
+
+		Debug :: dump( 
+			$this->inputFilter->getValue( 
+				"passwdConfirm" 
+			), "The ConfirmPasswd value of Input Filter"
+		);
+	}
+	
+	public function testValidationOfInputFilter()
+	{
+		$this->assertTrue( 
+			$this->inputFilter->isValid(),
+			Debug :: dump(
+				$this->inputFilter->getMessages()
+			)
+		);
+
+		/*
+		Debug :: dump( 
+			$this->inputFilter->getMessages()
+		);
+		 */
+	}
+
 }

@@ -13,6 +13,12 @@ class UserRegistrationForm extends Form
 	{
 		parent :: __construct( $name );
 
+		$this->setAttributes( [ 
+			"id" => "login-form", 
+			"role" => "form",
+			"style" => "display: block",
+		] );
+
 		$this
 			->add( [ 
 				"name" => "id",
@@ -22,6 +28,7 @@ class UserRegistrationForm extends Form
 				"name" => "email",
 				"type" => "email",
 				"attributes" => [
+					"class" => "form-control",
 					"placeholder" => "Email",
 				],
 				"options" => []
@@ -30,6 +37,7 @@ class UserRegistrationForm extends Form
 				"name" => "passwd",
 				"type" => "password",
 				"attributes" => [
+					"class" => "form-control",
 					"placeholder" => "Password",
 				],
 				"options" => [],
@@ -38,18 +46,19 @@ class UserRegistrationForm extends Form
 				"name" => "passwdConfirm",
 				"type" => "password",
 				"attributes" => [
+					"class" => "form-control",
 					"placeholder" => "Repeat Password",
 				],
 				"options" => [],
 			] )
-//			->add( [ 
-//				"name" => "captcha",
-//				"object" => $captcha,
-//			] )
+			->add( [ 
+				"name" => "captcha",
+			] )
 			->add( [ 
 				"name" => "submitButton",
 				"type" => "submit",
 				"attributes" => [
+					"class" => "form-control btn btn-login",
 					"value" => "Add User",
 				],
 				"options" => [],
